@@ -8,7 +8,7 @@ Currently the top 100 emotes are loaded from the better ttv api plus a few extra
 ## Installation 
 ### Extension method
 1. Download the latest release [here](https://github.com/TomSteer1/TwitchMeet/releases/latest)
-2. Go to `chrome://extensions` and enable **Developer Mode**
+2. Go to `about://extensions` and enable **Developer Mode**
 3. Drag the crx file into your browser and then click **Add Extension** when a popup appears
 ### Manual method
 1. Copy the contents of [script.js](https://raw.githubusercontent.com/TomSteer1/TwitchMeet/master/script.js)
