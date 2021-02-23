@@ -1,0 +1,20 @@
+{
+    "manifest_version": 2,
+
+    "name": "Twitch Meet",
+    "version": "0.1",
+    "description": "Replaces twitch emotes with correct images",
+    
+    "web_accessible_resources": ["script.js"],
+    "content_scripts": [
+        {
+          "matches": ["*://meet.google.com/*"],
+          "js": ["inject.js"]
+        }
+      ],
+    "permissions": [
+    ],
+    "icons": {
+      "128": "img/icon-extensionMenu.png"
+    }
+}
