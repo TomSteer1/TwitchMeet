@@ -6,6 +6,6 @@ Currently the top 100 emotes are loaded from the better ttv api plus a few extra
 
 
 ## Installation 
-1. Download the latest release [here](https://github.com/TomSteer1/TwitchMeet/releases)
+1. Download the latest release [here](https://github.com/TomSteer1/TwitchMeet/releases/latest)
 2. Go to `chrome://extensions` and enable **Developer Mode**
 3. Drag the crx file into your browser and then click **add extension** when a popup appears
