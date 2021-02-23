@@ -1,4 +1,4 @@
-
+//#region Styling
 const styleElement = document.createElement("style");
 styleElement.innerHTML = `
     .emote-container {
@@ -29,8 +29,42 @@ styleElement.innerHTML = `
         opacity: 1;
         display: inline;
     }
+
+    div#emoteMenu {
+        -webkit-user-select: none;
+        transition: background .3s;
+        border: 0;
+        border-radius: 50%;
+        cursor: pointer;
+        display: inline-block;
+        flex-shrink: 0;
+        height: 48px;
+        outline: none;
+        overflow: hidden;
+        position: relative;
+        text-align: center;
+        -webkit-tap-highlight-color: transparent;
+        width: 48px;
+        z-index: 0;
+        margin-bottom: 12px;
+        margin-right: 12px;
+    }
+
+    div#emotes {
+        position: absolute;
+        height: 40px;
+        bottom: 100%;
+        left:0;
+    }
+    
+    .emote img{
+        height:24px;
+    }
+
     `;
 document.head.appendChild(styleElement);
+
+//#endregion
 
 //#region  twitchEmotes
 
@@ -85,8 +119,52 @@ fetch("https://api.betterttv.net/3/emotes/shared/top?offset=0&limit=100").then(r
 })
 
 
+//#endregion
+
+//#region Disabled emoteMenu
+
+// const emoteMenu = document.createElement("div")
+// emoteMenu.id = "emoteMenu"
+// emoteMenu.innerHTML = `
+//         <svg width="24" height="100%" version="1.1" viewBox="0 0 20 20" x="0px" y="0px" class=" DPvwYc e3AdI Hdh4hc cIGbvc NMm5M hhikbc"><g><path d="M7 11a1 1 0 100-2 1 1 0 000 2zM14 10a1 1 0 11-2 0 1 1 0 012 0zM10 14a2 2 0 002-2H8a2 2 0 002 2z"></path><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-2 0a6 6 0 11-12 0 6 6 0 0112 0z" clip-rule="evenodd"></path></g></svg>
+//     `;
+// document.querySelector("[class='BC4V9b']").appendChild(emoteMenu);
+
+
+// const emotes = document.createElement("div");
+// emotes.id = "emotes";
+// emotes.innerHTML = ""
+// emoteIndex.forEach(function(url,name) {
+//     emotes.innerHTML += `<span class="emote" onclick="sendEmote();"><img src="${url}" aria-label="${name}"></span>`;
+// })
+
+// function sendEmote(){
+//     console.log("Clicked");
+// }
+
+
+// document.querySelector("[class='BC4V9b']").appendChild(emotes);
+
+// const eventContract = new jsaction.EventContract();
+
+// // Events will be handled for all elements under this container.
+// eventContract.addContainer(document.getElementById('emotes'));
+
+// // Register the event types we care about.
+// eventContract.addEvent('click');
+
+// const dispatcher = new jsaction.Dispatcher();
+// eventContract.dispatchTo(dispatcher.dispatch.bind(dispatcher));
+
+// // Register individual handlers
+
+// const click = function(flow) {
+//   // do stuff
+//   alert('click event dispatched!');
+// };
 
 //#endregion
+
 
 let originalAppendChild = Element.prototype.appendChild;
 Element.prototype.appendChild = function(element){
@@ -106,3 +184,4 @@ Element.prototype.appendChild = function(element){
     return originalAppendChild.call(this, element);
 }
 
+console.log("Twitch Meet has been loaded");
