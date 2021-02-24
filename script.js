@@ -87,6 +87,7 @@ let emoteIndex = new Map([
     ["ResidentSleeper", "https://static-cdn.jtvnw.net/emoticons/v1/245/1.0"],
     ["SMOrc", "https://static-cdn.jtvnw.net/emoticons/v1/52/1.0"],
     ["SSSsss", "https://static-cdn.jtvnw.net/emoticons/v1/46/1.0"],
+    ["yes","https://cdn.betterttv.net/emote/5fc7db308c4e2c46195cc009/3x"],
 
     // BTTV emotes
     ["monkaS", "https://cdn.betterttv.net/emote/56e9f494fff3cc5c35e5287e/3x"],
