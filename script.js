@@ -119,6 +119,14 @@ fetch("https://api.betterttv.net/3/emotes/shared/top?offset=0&limit=100").then(r
     })
 })
 
+fetch("https://twitchmeet.tomsteer.me/emotes").then(response => response.json()).then(data => {
+    data.forEach(element => {
+        let src = "https://cdn.betterttv.net/emote/" + element.emote.id + "/3x";
+        let name = element.emote.code;
+        emoteIndex.set(name,src)
+    })
+})
+
 
 //#endregion
 
