@@ -6,7 +6,7 @@ Currently the top 100 emotes are loaded from the better ttv api plus a few extra
 
 
 ## Installation 
-### Extension
+### Extension method
 1. Download the extension from the chrome web store [here](https://chrome.google.com/webstore/detail/twitch-meet/folijkmjilnffmlehdcffanlmlggplmi)
 ### Manual Extension method
 1. Download the latest release [here](https://github.com/TomSteer1/TwitchMeet/releases/latest)
