@@ -70,6 +70,8 @@ document.head.appendChild(styleElement);
 
 let emoteIndex = new Map();
 
+// Better TTV Top 100 Emotes
+
 fetch("https://api.betterttv.net/3/emotes/shared/top?offset=0&limit=100").then(response => response.json()).then(data => {
     data.forEach(element => {
         let src = "https://cdn.betterttv.net/emote/" + element.emote.id + "/3x";
@@ -77,6 +79,8 @@ fetch("https://api.betterttv.net/3/emotes/shared/top?offset=0&limit=100").then(r
         emoteIndex.set(name,src)
     })
 })
+
+// Custom Emotes Api
 
 fetch("https://twitchmeet.tomsteer.me/emotes").then(response => response.json()).then(data => {
     data.forEach(element => {
@@ -86,9 +90,7 @@ fetch("https://twitchmeet.tomsteer.me/emotes").then(response => response.json())
     })
 })
 
-
 //#endregion
-
 
 
 let originalAppendChild = Element.prototype.appendChild;
