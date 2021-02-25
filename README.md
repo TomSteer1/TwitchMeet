@@ -4,6 +4,10 @@ A chrome extension that replaces references to twitch emotes with an image of th
 
 Currently the top 100 emotes are loaded from the better ttv api plus a few extras
 
+# Available emotes
+The currently available emotes can be seen [here](https://twitchmeet.tomsteer.me/)
+# Suggesting emotes
+You can suggest emotes [here](https://forms.gle/V6T1kh9ihAWhLoTP8)
 
 ## Installation 
 ### Extension method
@@ -17,5 +21,3 @@ Currently the top 100 emotes are loaded from the better ttv api plus a few extra
 2. Open the developer console on google meet with **F12** or **CTRL + SHIFT + I**
 3. Paste and run the contents of [script.js](https://raw.githubusercontent.com/TomSteer1/TwitchMeet/master/script.js) in the console
 
-# Available emotes
-The currently available emotes can be seen [here](https://twitchmeet.tomsteer.me/)
