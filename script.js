@@ -100,9 +100,12 @@ Element.prototype.appendChild = function(element){
                 targetElement = element.getElementsByClassName("oIy2qc")[0];
             }
             emoteIndex.forEach(function(url, name) {
-                targetElement.innerHTML =
-                    targetElement.innerHTML.replaceAll(name,
-                    `<span class="emote-container"><img src="${url}"/><span>${name}</span></span>`);
+                let text = targetElement.innerHTML.split(" ");
+                if(text.indexOf(name) != -1){
+                    text[text.indexOf(name)] =
+                        `<span class="emote-container"><img src="${url}"/><span>${name}</span></span>`;
+                }
+                targetElement.innerHTML = text.join(" ");
             });
         }
     }
