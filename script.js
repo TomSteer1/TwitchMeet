@@ -101,14 +101,13 @@ Element.prototype.appendChild = function(element){
             if (element.classList.contains("GDhqjd")) {
                 targetElement = element.getElementsByClassName("oIy2qc")[0];
             }
-            emoteIndex.forEach(function(url, name) {
-                let text = targetElement.innerHTML.split(" ");
-                if(text.indexOf(name) != -1){
-                    text[text.indexOf(name)] =
-                        `<span class="emote-container"><img src="${url}"/><span>${name}</span></span>`;
+            let text = targetElement.innerHTML.split(" ");
+            for(x in text){
+                if(emoteIndex.get(text[x])){
+                    text[x] = `<span class="emote-container"><img src="${emoteIndex.get(text[x])}"/><span>${text[x]}</span></span>`;
                 }
-                targetElement.innerHTML = text.join(" ");
-            });
+            }
+            targetElement.innerHTML = text.join(" ");
         }
     }
     return originalAppendChild.call(this, element);
