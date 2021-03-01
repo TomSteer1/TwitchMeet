@@ -82,14 +82,19 @@ fetch("https://api.betterttv.net/3/emotes/shared/top?offset=0&limit=100").then(r
 
 // Custom Emotes Api
 
-fetch("https://twitchmeet.tomsteer.me/emotes").then(response => response.json()).then(data => {
-    data.forEach(element => {
-        let src = element.emote.src;
-        let name = element.emote.code;
-        emoteIndex.set(name,src)
+function getCustomEmotes(){
+    fetch("https://twitchmeet.tomsteer.me/emotes").then(response => response.json()).then(data => {
+        console.log("Emotes collected");
+        data.forEach(element => {
+            let src = element.emote.src;
+            let name = element.emote.code;
+            emoteIndex.set(name,src)
+        })
     })
-})
+}
 
+
+getCustomEmotes();
 //#endregion
 
 
@@ -114,3 +119,5 @@ Element.prototype.appendChild = function(element){
 }
 
 console.log("Twitch Meet has been loaded");
+// Checks for new emotes every 5 minutes
+let autoCheck = setInterval(getCustomEmotes,300000);
