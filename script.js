@@ -107,11 +107,18 @@ Element.prototype.appendChild = function(element){
                 targetElement = element.getElementsByClassName("oIy2qc")[0];
             }
             let text = targetElement.innerHTML.split(" ");
-            for(x in text){
-                if(emoteIndex.get(text[x])){
-                    text[x] = `<span class="emote-container"><img src="${emoteIndex.get(text[x])}"/><span>${text[x]}</span></span>`;
+            if(text[0] != "!scr"){
+                for(x in text){
+                    if(emoteIndex.get(text[x])){
+                        text[x] = `<span class="emote-container"><img src="${emoteIndex.get(text[x])}"/><span>${text[x]}</span></span>`;
+                    }
                 }
+            }else{
+                document.getElementsByClassName("ZHdB2e")[0].style.width = "500px";
+                document.getElementsByClassName("PBWx0c")[0].style.width = "500px";
+                text = [`<iframe src="https://scratch.mit.edu/projects/${text[1]}/embed" allowtransparency="true" width="485" height="402" frameborder="0" scrolling="no" allowfullscreen></iframe>`];
             }
+            console.log(text);
             targetElement.innerHTML = text.join(" ");
         }
     }
