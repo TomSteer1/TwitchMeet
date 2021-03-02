@@ -61,6 +61,10 @@ styleElement.innerHTML = `
         height:24px;
     }
 
+    .embedHidden{
+        display: none;
+    }
+
     `;
 document.head.appendChild(styleElement);
 
@@ -86,22 +90,32 @@ scratchEmbeds.innerHTML = `
     </div>
 
 `;
-scratchEmbeds.classList = ["scratchEmbed"];
 scratchEmbeds.addEventListener("click", function(e){
     e.preventDefault();
-    let states = ["Enable Scratch Embeds"," Disable Scratch Embeds"]
+    let states = ["Enable Scratch Embeds"," Disable Scratch Embeds"];
+    let embeds = document.getElementsByClassName("scratchEmbed");
     if(scratchEmbedEnabled)
     {
         scratchEmbeds.getElementsByClassName("sPXonc")[0].innerHTML = states[0];
         scratchEmbedEnabled = false;
-        document.getElementsByClassName("ZHdB2e")[0].style.width = "";
-        document.getElementsByClassName("PBWx0c")[0].style.width = "";
+        if(!youtubeEmbedEnabled){
+            document.getElementsByClassName("ZHdB2e")[0].style.width = "";
+            document.getElementsByClassName("PBWx0c")[0].style.width = "";
+        }
+        for(let i = 0; i < embeds.length ; i++){
+            embeds[i].classList.add("embedHidden")
+        }
     }else{
         scratchEmbeds.getElementsByClassName("sPXonc")[0].innerHTML = states[1];
         scratchEmbedEnabled = true;
         document.getElementsByClassName("ZHdB2e")[0].style.width = "initial";
         document.getElementsByClassName("PBWx0c")[0].style.width = "initial";
+        for(let i = 0; i < embeds.length ; i++){
+            embeds[i].classList.remove("embedHidden");
+        }
     }
+    let messages = document.getElementsByClassName("oIy2qc");
+    messages[messages.length -1].scrollIntoView();
 });
 
 document.getElementsByClassName("uD3s5c")[0].append(scratchEmbeds);
@@ -129,22 +143,32 @@ youtubeEmbeds.innerHTML = `
     </div>
 
 `;
-youtubeEmbeds.classList = ["youtubeEmbed"];
 youtubeEmbeds.addEventListener("click", function(e){
     e.preventDefault();
     let states = ["Enable Youtube Embeds"," Disable Youtube Embeds"]
+    let embeds = document.getElementsByClassName("youtubeEmbed");
     if(youtubeEmbedEnabled)
     {
         youtubeEmbeds.getElementsByClassName("sPXonc")[0].innerHTML = states[0];
         youtubeEmbedEnabled = false;
-        document.getElementsByClassName("ZHdB2e")[0].style.width = "";
-        document.getElementsByClassName("PBWx0c")[0].style.width = "";
+        if(!scratchEmbedEnabled){
+            document.getElementsByClassName("ZHdB2e")[0].style.width = "";
+            document.getElementsByClassName("PBWx0c")[0].style.width = "";
+        }
+        for(let i = 0; i < embeds.length ; i++){
+            embeds[i].classList.add("embedHidden")
+        }
     }else{
         youtubeEmbeds.getElementsByClassName("sPXonc")[0].innerHTML = states[1];
         youtubeEmbedEnabled = true;
         document.getElementsByClassName("ZHdB2e")[0].style.width = "initial";
         document.getElementsByClassName("PBWx0c")[0].style.width = "initial";
+        for(let i = 0; i < embeds.length ; i++){
+            embeds[i].classList.remove("embedHidden");
+        }
     }
+    let messages = document.getElementsByClassName("oIy2qc");
+    messages[messages.length -1].scrollIntoView();
 });
 
 document.getElementsByClassName("uD3s5c")[0].append(youtubeEmbeds);
@@ -196,23 +220,34 @@ Element.prototype.appendChild = function(element){
                 for(x in text){
                     if(emoteIndex.get(text[x])){
                         text[x] = `<span class="emote-container"><img src="${emoteIndex.get(text[x])}"/><span>${text[x]}</span></span>`;
-                    }else if(text[x].includes("https://www.youtube.com/") && youtubeEmbedEnabled){         
-                        document.getElementsByClassName("ZHdB2e")[0].style.width = "initial";
-                        document.getElementsByClassName("PBWx0c")[0].style.width = "initial";
+                    }else if(text[x].includes("https://www.youtube.com/"))
+                    {    
+                        let iframeClass = "youtubeEmbed"
+                        if(!youtubeEmbedEnabled)
+                        {
+                            iframeClass = "youtubeEmbed embedHidden"
+                        }
                         let videoLink = text[x].split('"')[1];
                         let videoCode = videoLink.split("?")[1];
                         videoCode = videoCode.slice(2);
                         text.push("<br>");
-                        text.push(`<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/${videoCode}?controls=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>`);
-                        break;
+                        text.push(`<iframe class='${iframeClass}' width="560" height="315" src="https://www.youtube-nocookie.com/embed/${videoCode}?controls=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>`);
+                    }else if(text[x].includes("https://scratch.mit.edu/"))
+                    {   
+                        let iframeClass = "scratchEmbed"
+                        if(!scratchEmbedEnabled)
+                        {
+                            iframeClass = "scratchEmbed embedHidden"
+                        }
+                        let link = text[x].split('"')[1];
+                        let components = link.split("/");
+                        projectCode = components[4];
+                        text.push("<br>");
+                        text.push(`<iframe class='${iframeClass}' src="https://scratch.mit.edu/projects/${projectCode}/embed" allowtransparency="true" width="485" height="402" frameborder="0" scrolling="no" allowfullscreen></iframe>`);
+                        
                     }
                 }
-            }else if(scratchEmbedEnabled){                
-                document.getElementsByClassName("ZHdB2e")[0].style.width = "initial";
-                document.getElementsByClassName("PBWx0c")[0].style.width = "initial";
-                text = [`<iframe src="https://scratch.mit.edu/projects/${text[1]}/embed" allowtransparency="true" width="485" height="402" frameborder="0" scrolling="no" allowfullscreen></iframe>`];
             }
-            console.log(text);
             targetElement.innerHTML = text.join(" ");
         }
     }
