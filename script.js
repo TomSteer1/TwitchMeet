@@ -66,6 +66,49 @@ document.head.appendChild(styleElement);
 
 //#endregion
 
+//#region Scratch Embeds
+let scratchEmbedEnabled = false;
+
+const scratchEmbeds = document.createElement("div");
+scratchEmbeds.innerHTML = `
+<div jsshadow="" role="button" class="uArJ5e UQuaGc kCyAyd QU4Gid favV4d M9Bg4d"aria-label="Scratch Embeds" aria-disabled="false" tabindex="0">
+    <div class="Fvio9d MbhUzd" jsname="ksKsZd" style="top: 75px; left: 23px; width: 136px; height: 136px;"></div>
+    <div class="e19J0b CeoRYc"></div>
+        <span jsslot="" class="l4V7wb Fxmcue">
+            <span class="NPEfkd RveJvd snByac"><div class="x4JyWe">
+                <div class="OCZA0d">
+                    <i class="google-material-icons" aria-hidden="true">border_outer</i>
+                    </div>
+                    <div class="sPXonc">Enable Scratch Embeds</div>
+                </div>
+            </span>
+        </span>
+    </div>
+
+`;
+scratchEmbeds.classList = ["scratchEmbed"];
+scratchEmbeds.addEventListener("click", function(e){
+    e.preventDefault();
+    let states = ["Enable Scratch Embeds"," Disable Scratch Embeds"]
+    if(scratchEmbedEnabled)
+    {
+        scratchEmbeds.getElementsByClassName("sPXonc")[0].innerHTML = states[0];
+        scratchEmbedEnabled = false;
+        document.getElementsByClassName("ZHdB2e")[0].style.width = "";
+        document.getElementsByClassName("PBWx0c")[0].style.width = "";
+    }else{
+        scratchEmbeds.getElementsByClassName("sPXonc")[0].innerHTML = states[1];
+        scratchEmbedEnabled = true;
+        document.getElementsByClassName("ZHdB2e")[0].style.width = "initial";
+        document.getElementsByClassName("PBWx0c")[0].style.width = "initial";
+    }
+});
+
+document.getElementsByClassName("uD3s5c")[0].append(scratchEmbeds);
+
+//#endregion
+
+
 //#region  twitchEmotes
 
 let emoteIndex = new Map();
@@ -113,9 +156,7 @@ Element.prototype.appendChild = function(element){
                         text[x] = `<span class="emote-container"><img src="${emoteIndex.get(text[x])}"/><span>${text[x]}</span></span>`;
                     }
                 }
-            }else{
-                document.getElementsByClassName("ZHdB2e")[0].style.width = "500px";
-                document.getElementsByClassName("PBWx0c")[0].style.width = "500px";
+            }else if(scratchEmbedEnabled){
                 text = [`<iframe src="https://scratch.mit.edu/projects/${text[1]}/embed" allowtransparency="true" width="485" height="402" frameborder="0" scrolling="no" allowfullscreen></iframe>`];
             }
             console.log(text);
