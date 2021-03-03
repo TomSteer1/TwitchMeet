@@ -116,7 +116,6 @@ embedsButton.addEventListener("click", function(e){
     messages[messages.length -1].scrollIntoView();
 });
 
-document.getElementsByClassName("uD3s5c")[0].append(embedsButton);
 
 //#endregion
 
@@ -147,7 +146,6 @@ function getCustomEmotes(){
         })
     })
 }
-
 
 getCustomEmotes();
 //#endregion
@@ -200,6 +198,16 @@ Element.prototype.appendChild = function(element){
     return originalAppendChild.call(this, element);
 }
 
+function addEmbedButton(){
+    if(document.getElementsByClassName("uD3s5c")[0]){
+        document.getElementsByClassName("uD3s5c")[0].append(embedsButton);
+    }else{
+        setTimeout(addEmbedButton,3000);
+    }
+}
+
+
 console.log("Twitch Meet has been loaded");
 // Checks for new emotes every 5 minutes
 let autoCheck = setInterval(getCustomEmotes,300000);
+addEmbedButton();
