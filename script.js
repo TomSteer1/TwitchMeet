@@ -70,12 +70,12 @@ document.head.appendChild(styleElement);
 
 //#endregion
 
-//#region Scratch Embeds
-let scratchEmbedEnabled = false;
+//#region Embeds
+let embedsEnabled = false;
 
-const scratchEmbeds = document.createElement("div");
-scratchEmbeds.innerHTML = `
-<div jsshadow="" role="button" class="uArJ5e UQuaGc kCyAyd QU4Gid favV4d M9Bg4d"aria-label="Scratch Embeds" aria-disabled="false" tabindex="0">
+const embedsButton = document.createElement("div");
+embedsButton.innerHTML = `
+<div jsshadow="" role="button" class="uArJ5e UQuaGc kCyAyd QU4Gid favV4d M9Bg4d"aria-label="Toggle Embeds" aria-disabled="false" tabindex="0">
     <div class="Fvio9d MbhUzd" jsname="ksKsZd" style="top: 75px; left: 23px; width: 136px; height: 136px;"></div>
     <div class="e19J0b CeoRYc"></div>
         <span jsslot="" class="l4V7wb Fxmcue">
@@ -83,31 +83,29 @@ scratchEmbeds.innerHTML = `
                 <div class="OCZA0d">
                     <i class="google-material-icons" aria-hidden="true">border_outer</i>
                     </div>
-                    <div class="sPXonc">Enable Scratch Embeds</div>
+                    <div class="sPXonc">Enable Embeds</div>
                 </div>
             </span>
         </span>
     </div>
 
 `;
-scratchEmbeds.addEventListener("click", function(e){
+embedsButton.addEventListener("click", function(e){
     e.preventDefault();
-    let states = ["Enable Scratch Embeds"," Disable Scratch Embeds"];
-    let embeds = document.getElementsByClassName("scratchEmbed");
-    if(scratchEmbedEnabled)
+    let states = ["Enable Embeds"," Disable Embeds"];
+    let embeds = document.getElementsByClassName("customEmbed");
+    if(embedsEnabled)
     {
-        scratchEmbeds.getElementsByClassName("sPXonc")[0].innerHTML = states[0];
-        scratchEmbedEnabled = false;
-        if(!youtubeEmbedEnabled){
-            document.getElementsByClassName("ZHdB2e")[0].style.width = "";
-            document.getElementsByClassName("PBWx0c")[0].style.width = "";
-        }
+        embedsButton.getElementsByClassName("sPXonc")[0].innerHTML = states[0];
+        embedsEnabled = false;
+        document.getElementsByClassName("ZHdB2e")[0].style.width = "";
+        document.getElementsByClassName("PBWx0c")[0].style.width = "";
         for(let i = 0; i < embeds.length ; i++){
             embeds[i].classList.add("embedHidden")
         }
     }else{
-        scratchEmbeds.getElementsByClassName("sPXonc")[0].innerHTML = states[1];
-        scratchEmbedEnabled = true;
+        embedsButton.getElementsByClassName("sPXonc")[0].innerHTML = states[1];
+        embedsEnabled = true;
         document.getElementsByClassName("ZHdB2e")[0].style.width = "initial";
         document.getElementsByClassName("PBWx0c")[0].style.width = "initial";
         for(let i = 0; i < embeds.length ; i++){
@@ -118,62 +116,10 @@ scratchEmbeds.addEventListener("click", function(e){
     messages[messages.length -1].scrollIntoView();
 });
 
-document.getElementsByClassName("uD3s5c")[0].append(scratchEmbeds);
+document.getElementsByClassName("uD3s5c")[0].append(embedsButton);
 
 //#endregion
 
-//#region youtubeEmbeds
-
-let youtubeEmbedEnabled = false;
-
-const youtubeEmbeds = document.createElement("div");
-youtubeEmbeds.innerHTML = `
-<div jsshadow="" role="button" class="uArJ5e UQuaGc kCyAyd QU4Gid favV4d M9Bg4d"aria-label="Scratch Embeds" aria-disabled="false" tabindex="0">
-    <div class="Fvio9d MbhUzd" jsname="ksKsZd" style="top: 75px; left: 23px; width: 136px; height: 136px;"></div>
-    <div class="e19J0b CeoRYc"></div>
-        <span jsslot="" class="l4V7wb Fxmcue">
-            <span class="NPEfkd RveJvd snByac"><div class="x4JyWe">
-                <div class="OCZA0d">
-                    <i class="google-material-icons" aria-hidden="true">border_outer</i>
-                    </div>
-                    <div class="sPXonc">Enable Youtube Embeds</div>
-                </div>
-            </span>
-        </span>
-    </div>
-
-`;
-youtubeEmbeds.addEventListener("click", function(e){
-    e.preventDefault();
-    let states = ["Enable Youtube Embeds"," Disable Youtube Embeds"]
-    let embeds = document.getElementsByClassName("youtubeEmbed");
-    if(youtubeEmbedEnabled)
-    {
-        youtubeEmbeds.getElementsByClassName("sPXonc")[0].innerHTML = states[0];
-        youtubeEmbedEnabled = false;
-        if(!scratchEmbedEnabled){
-            document.getElementsByClassName("ZHdB2e")[0].style.width = "";
-            document.getElementsByClassName("PBWx0c")[0].style.width = "";
-        }
-        for(let i = 0; i < embeds.length ; i++){
-            embeds[i].classList.add("embedHidden")
-        }
-    }else{
-        youtubeEmbeds.getElementsByClassName("sPXonc")[0].innerHTML = states[1];
-        youtubeEmbedEnabled = true;
-        document.getElementsByClassName("ZHdB2e")[0].style.width = "initial";
-        document.getElementsByClassName("PBWx0c")[0].style.width = "initial";
-        for(let i = 0; i < embeds.length ; i++){
-            embeds[i].classList.remove("embedHidden");
-        }
-    }
-    let messages = document.getElementsByClassName("oIy2qc");
-    messages[messages.length -1].scrollIntoView();
-});
-
-document.getElementsByClassName("uD3s5c")[0].append(youtubeEmbeds);
-
-//#endregion
 
 //#region  twitchEmotes
 
@@ -222,10 +168,10 @@ Element.prototype.appendChild = function(element){
                         text[x] = `<span class="emote-container"><img src="${emoteIndex.get(text[x])}"/><span>${text[x]}</span></span>`;
                     }else if(text[x].includes("https://www.youtube.com/"))
                     {    
-                        let iframeClass = "youtubeEmbed"
-                        if(!youtubeEmbedEnabled)
+                        let iframeClass = "customEmbed"
+                        if(!embedsEnabled)
                         {
-                            iframeClass = "youtubeEmbed embedHidden"
+                            iframeClass = "customEmbed embedHidden"
                         }
                         let videoLink = text[x].split('"')[1];
                         let videoCode = videoLink.split("?")[1];
@@ -234,10 +180,10 @@ Element.prototype.appendChild = function(element){
                         text.push(`<iframe class='${iframeClass}' width="560" height="315" src="https://www.youtube-nocookie.com/embed/${videoCode}?controls=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>`);
                     }else if(text[x].includes("https://scratch.mit.edu/"))
                     {   
-                        let iframeClass = "scratchEmbed"
-                        if(!scratchEmbedEnabled)
+                        let iframeClass = "customEmbed"
+                        if(!embedsEnabled)
                         {
-                            iframeClass = "scratchEmbed embedHidden"
+                            iframeClass = "customEmbed embedHidden"
                         }
                         let link = text[x].split('"')[1];
                         let components = link.split("/");
