@@ -71,50 +71,50 @@ document.head.appendChild(styleElement);
 //#endregion
 
 //#region Embeds
-let embedsEnabled = false;
+// let embedsEnabled = false;
 
-const embedsButton = document.createElement("div");
-embedsButton.innerHTML = `
-<div jsshadow="" role="button" class="uArJ5e UQuaGc kCyAyd QU4Gid favV4d M9Bg4d"aria-label="Toggle Embeds" aria-disabled="false" tabindex="0">
-    <div class="Fvio9d MbhUzd" jsname="ksKsZd" style="top: 75px; left: 23px; width: 136px; height: 136px;"></div>
-    <div class="e19J0b CeoRYc"></div>
-        <span jsslot="" class="l4V7wb Fxmcue">
-            <span class="NPEfkd RveJvd snByac"><div class="x4JyWe">
-                <div class="OCZA0d">
-                    <i class="google-material-icons" aria-hidden="true">border_outer</i>
-                    </div>
-                    <div class="sPXonc">Enable Embeds</div>
-                </div>
-            </span>
-        </span>
-    </div>
+// const embedsButton = document.createElement("div");
+// embedsButton.innerHTML = `
+// <div jsshadow="" role="button" class="uArJ5e UQuaGc kCyAyd QU4Gid favV4d M9Bg4d"aria-label="Toggle Embeds" aria-disabled="false" tabindex="0">
+//     <div class="Fvio9d MbhUzd" jsname="ksKsZd" style="top: 75px; left: 23px; width: 136px; height: 136px;"></div>
+//     <div class="e19J0b CeoRYc"></div>
+//         <span jsslot="" class="l4V7wb Fxmcue">
+//             <span class="NPEfkd RveJvd snByac"><div class="x4JyWe">
+//                 <div class="OCZA0d">
+//                     <i class="google-material-icons" aria-hidden="true">border_outer</i>
+//                     </div>
+//                     <div class="sPXonc">Enable Embeds</div>
+//                 </div>
+//             </span>
+//         </span>
+//     </div>
 
-`;
-embedsButton.addEventListener("click", function(e){
-    e.preventDefault();
-    let states = ["Enable Embeds"," Disable Embeds"];
-    let embeds = document.getElementsByClassName("customEmbed");
-    if(embedsEnabled)
-    {
-        embedsButton.getElementsByClassName("sPXonc")[0].innerHTML = states[0];
-        embedsEnabled = false;
-        document.getElementsByClassName("ZHdB2e")[0].style.width = "";
-        document.getElementsByClassName("PBWx0c")[0].style.width = "";
-        for(let i = 0; i < embeds.length ; i++){
-            embeds[i].classList.add("embedHidden")
-        }
-    }else{
-        embedsButton.getElementsByClassName("sPXonc")[0].innerHTML = states[1];
-        embedsEnabled = true;
-        document.getElementsByClassName("ZHdB2e")[0].style.width = "initial";
-        document.getElementsByClassName("PBWx0c")[0].style.width = "initial";
-        for(let i = 0; i < embeds.length ; i++){
-            embeds[i].classList.remove("embedHidden");
-        }
-    }
-    let messages = document.getElementsByClassName("oIy2qc");
-    messages[messages.length -1].scrollIntoView();
-});
+// `;
+// embedsButton.addEventListener("click", function(e){
+//     e.preventDefault();
+//     let states = ["Enable Embeds"," Disable Embeds"];
+//     let embeds = document.getElementsByClassName("customEmbed");
+//     if(embedsEnabled)
+//     {
+//         embedsButton.getElementsByClassName("sPXonc")[0].innerHTML = states[0];
+//         embedsEnabled = false;
+//         document.getElementsByClassName("ZHdB2e")[0].style.width = "";
+//         document.getElementsByClassName("PBWx0c")[0].style.width = "";
+//         for(let i = 0; i < embeds.length ; i++){
+//             embeds[i].classList.add("embedHidden")
+//         }
+//     }else{
+//         embedsButton.getElementsByClassName("sPXonc")[0].innerHTML = states[1];
+//         embedsEnabled = true;
+//         document.getElementsByClassName("ZHdB2e")[0].style.width = "initial";
+//         document.getElementsByClassName("PBWx0c")[0].style.width = "initial";
+//         for(let i = 0; i < embeds.length ; i++){
+//             embeds[i].classList.remove("embedHidden");
+//         }
+//     }
+//     let messages = document.getElementsByClassName("oIy2qc");
+//     messages[messages.length -1].scrollIntoView();
+// });
 
 
 //#endregion
@@ -150,18 +150,17 @@ function getCustomEmotes(){
 getCustomEmotes();
 //#endregion
 
-let buttonsLoaded = false;
-let buttonsAdded = false;
+// let buttonsAdded = false;
 
 let originalAppendChild = Element.prototype.appendChild;
 Element.prototype.appendChild = function(element){
     if (element.classList) {
-        if(!buttonsAdded){  
-            if(document.getElementsByClassName("uD3s5c")[0]){
-                document.getElementsByClassName("uD3s5c")[0].append(embedsButton);
-                buttonsAdded = true;
-            }
-        }
+        // if(!buttonsAdded){  
+        //     if(document.getElementsByClassName("uD3s5c")[0]){
+        //         document.getElementsByClassName("uD3s5c")[0].append(embedsButton);
+        //         buttonsAdded = true;
+        //     }
+        // }
 
         if(element.classList.contains("oIy2qc") || element.classList.contains("ZNiiKc") || element.classList.contains("GDhqjd")){
             let targetElement = element;
@@ -169,38 +168,37 @@ Element.prototype.appendChild = function(element){
                 targetElement = element.getElementsByClassName("oIy2qc")[0];
             }
             let text = targetElement.innerHTML.split(" ");
-            if(text[0] != "!scr"){
                 for(x in text){
                     if(emoteIndex.get(text[x])){
                         text[x] = `<span class="emote-container"><img src="${emoteIndex.get(text[x])}"/><span>${text[x]}</span></span>`;
-                    }else if(text[x].includes("https://www.youtube.com/"))
-                    {    
-                        let iframeClass = "customEmbed"
-                        if(!embedsEnabled)
-                        {
-                            iframeClass = "customEmbed embedHidden"
-                        }
-                        let videoLink = text[x].split('"')[1];
-                        let videoCode = videoLink.split("?")[1];
-                        videoCode = videoCode.slice(2);
-                        text.push("<br>");
-                        text.push(`<iframe class='${iframeClass}' width="560" height="315" src="https://www.youtube-nocookie.com/embed/${videoCode}?controls=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>`);
-                    }else if(text[x].includes("https://scratch.mit.edu/"))
-                    {   
-                        let iframeClass = "customEmbed"
-                        if(!embedsEnabled)
-                        {
-                            iframeClass = "customEmbed embedHidden"
-                        }
-                        let link = text[x].split('"')[1];
-                        let components = link.split("/");
-                        projectCode = components[4];
-                        text.push("<br>");
-                        text.push(`<iframe class='${iframeClass}' src="https://scratch.mit.edu/projects/${projectCode}/embed" allowtransparency="true" width="485" height="402" frameborder="0" scrolling="no" allowfullscreen></iframe>`);
-                        
                     }
+                    // else if(text[x].includes("https://www.youtube.com/"))
+                    // {    
+                    //     let iframeClass = "customEmbed"
+                    //     if(!embedsEnabled)
+                    //     {
+                    //         iframeClass = "customEmbed embedHidden"
+                    //     }
+                    //     let videoLink = text[x].split('"')[1];
+                    //     let videoCode = videoLink.split("?")[1];
+                    //     videoCode = videoCode.slice(2);
+                    //     text.push("<br>");
+                    //     text.push(`<iframe class='${iframeClass}' width="560" height="315" src="https://www.youtube-nocookie.com/embed/${videoCode}?controls=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>`);
+                    // }else if(text[x].includes("https://scratch.mit.edu/"))
+                    // {   
+                    //     let iframeClass = "customEmbed"
+                    //     if(!embedsEnabled)
+                    //     {
+                    //         iframeClass = "customEmbed embedHidden"
+                    //     }
+                    //     let link = text[x].split('"')[1];
+                    //     let components = link.split("/");
+                    //     projectCode = components[4];
+                    //     text.push("<br>");
+                    //     text.push(`<iframe class='${iframeClass}' src="https://scratch.mit.edu/projects/${projectCode}/embed" allowtransparency="true" width="485" height="402" frameborder="0" scrolling="no" allowfullscreen></iframe>`);
+                        
+                    // }
                 }
-            }
             targetElement.innerHTML = text.join(" ");
         }
     }

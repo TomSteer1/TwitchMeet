@@ -2,7 +2,7 @@
     "manifest_version": 2,
 
     "name": "Twitch Meet",
-    "version": "0.7",
+    "version": "0.8",
     "description": "Replaces twitch emotes with correct images",
     
     "web_accessible_resources": ["script.js"],
