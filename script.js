@@ -1,6 +1,11 @@
+
+escapeHTMLPolicy = trustedTypes.createPolicy("forceInner", {
+    createHTML: (to_escape) => to_escape
+})
+
 //#region Styling
 const styleElement = document.createElement("style");
-styleElement.innerHTML = `
+styleElement.innerHTML = escapeHTMLPolicy.createHTML(`
     .emote-container {
         height: 40px;
         display: inline-block;
@@ -65,7 +70,7 @@ styleElement.innerHTML = `
         display: none;
     }
 
-    `;
+    `);
 document.head.appendChild(styleElement);
 
 //#endregion
@@ -199,7 +204,7 @@ Element.prototype.appendChild = function(element){
                         
                     // }
                 }
-            targetElement.innerHTML = text.join(" ");
+            targetElement.innerHTML = escapeHTMLPolicy.createHTML(text.join(" "));
         }
     }
     return originalAppendChild.call(this, element);
